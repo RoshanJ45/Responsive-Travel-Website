@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@500;600;700&display=swap");
+:root {
+  /* hsl color mode */
+  --first-color-second: hsl(190, 64%, 22%);
+  --title-color: hsl(190, 64%, 18%);
+  --text-color: hsl(190, 24%, 35%);
+  --input-color: hsl(190, 24%, 97%);
+  --body-color: hsl(190, 100%, 99%);
+  --scroll-bar-color: hsl(190, 12%, 90%);
+  --scroll-thumb-color: hsl(190, 12%, 75%);
+  /*========== Font and typography ==========*/
+  --biggest-font-size: 2.5rem;
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1rem;
+  --normal-font-size: .938rem;
+  --small-font-size: .813rem;
+  --smaller-font-size: .75rem;
+}
+@media screen and (min-width: 968px) {
+  :root {
+    --biggest-font-size: 4rem;
+    --h1-font-size: 2.25rem;
+    --h2-font-size: 1.75rem;
+    --h3-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --small-font-size: .875rem;
+    --smaller-font-size: .813rem;
+  }
+}
+/*========== Variables Dark theme ==========*/
+body.dark-theme {
+  --first-color-second: hsl(190, 54%, 12%);
+  --title-color: hsl(190, 24%, 95%);
+  --text-color: hsl(190, 8%, 75%);
+  --input-color: hsl(190, 29%, 16%);
+  --body-color: hsl(190, 29%, 12%);
+  --scroll-bar-color: hsl(190, 12%, 48%);
+  --scroll-thumb-color: hsl(190, 12%, 36%);
+}
+.nav__dark {
+  display: flex;
+  align-items: center;
+  column-gap: 2rem;
+  position: absolute;
+  left: 3rem;
+  bottom: 4rem;
+}
+.change-theme, .change-theme-name {
+  color: var(--text-color);
+}
+.change-theme {
+  cursor: pointer;
+  font-size: 1rem;
+}
+.change-theme-name {
+  font-size: var(--small-font-size);
+}
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 3rem 0 0 0;
+  font-family: 'Open Sans', sans-serif;
+  font-size: var(--normal-font-size);
+  background-color: var(--body-color);
+  color: var(--text-color);
+}
+h1, h2, h3 {
+  color: var(--title-color);
+  font-weight: 600;
+  font-family: 'Raleway', sans-serif;
+}
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+img,video {
+  max-width: 100%;
+  height: auto;
+}
+button,input {
+  border: none;
+  font-family: 'Open Sans', sans-serif;
+  font-size: var(--normal-font-size);
+}
+button {
+  cursor: pointer;
+}
+input {
+  outline: none;
+}
+.main {
+  overflow-x: hidden;
+}
+.section {
+  padding: 4.5rem 0 2.5rem;
+}
+.section__title {
+  font-size: var(--h2-font-size);
+  color: var(--title-color);
+  text-align: center;
+  text-transform: capitalize;
+  margin-bottom: 2rem;
+}
+.container {
+  max-width: 968px;
+  margin-left: 1rem;
+  margin-right:1rem;
+}
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+.header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index:  100;
+  background-color: transparent;
+}
+.nav {
+  height: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav__logo, .nav__toggle {
+  color: #FFF;
+}
+.nav__logo {
+  font-weight: 600;
+}
+.nav__toggle {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.nav__menu {
+  position: relative;
+}
+@media screen and (max-width: 767px) {
+  .nav__menu {
+    position: fixed;
+    background-color: var(--body-color);
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100%;
+    box-shadow: -1px 0 4px rgba(14, 55, 63, 0.15);
+    padding: 3rem;
+    transition: .4s;
+  }
+}
+.nav__list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2.5rem;
+}
+.nav__link {
+  color: hsl(190, 8%, 60%);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.nav__link:hover {
+  color: var(--text-color);
+}
+.nav__close {
+  position: absolute;
+  top: .75rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  color: var(--title-color);
+  cursor: pointer;
+}
+.show-menu {
+  right: 0;
+}
+.scroll-header {
+  background-color: var(--body-color);
+  box-shadow: 0 0 4px rgba(14, 55, 63, 0.15);
+}
+.scroll-header .nav__logo,.scroll-header .nav__toggle {
+  color: var(--title-color);
+}
+.active-link {
+  position: relative;
+  color: var(--title-color);
+}
+.active-link::before {
+  content: '';
+  position: absolute;
+  background-color: var(--title-color);
+  width: 100%;
+  height: 2px;
+  bottom: -.75rem;
+  left: 0;
+}
+.home__img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  object-position: 83%;
+}
+.home__container {
+  position: relative;
+  height: calc(100vh -3rem);
+  align-content: center;
+  row-gap: 3rem;
+}
+.home__data-subtitle,.home__data-title, 
+.home__social-link,.home__info {
+  color: #FFF;
+}
+.home__data-subtitle {
+  display: block;
+  font-weight: 600;
+  margin-bottom: .75rem;
+}
+.home__data-title {
+  font-size: var(--biggest-font-size);
+  font-weight: 500;
+  margin-bottom:2.5rem;
+}
+.home__social {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
+}
+.home__social-link {
+  font-size: 1.2rem;
+  width: max-content;
+}
+.home__info {
+  background-color: hsl(190, 64%, 22%);
+  display: flex;
+  padding: 1.5rem 1rem;
+  align-items: center;
+  column-gap: .5rem;
+  position: absolute;
+  right: 0;
+  border-radius: 10%;
+  bottom: 1rem;
+  width: 228px;
+}
+.home__info-title {
+  display: block;
+  font-size: var(--small-font-size);
+  font-weight: 600;
+  margin-bottom: .75rem;
+}
+.home__info-button {
+  font-size: var(--smaller-font-size);
+}
+.home__info-overlay {
+  border-radius: 10%;
+  overflow: hidden;
+}
+.home__info-img {
+  width: 145px;
+  transition: .3s;
+}
+.home__info-img:hover {
+  transform: scale(1.1);
+}
+.button {
+  display: inline-block;
+  background-color:  hsl(190, 64%, 22%);
+  color: #FFF;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  transition: .3s;
+  border-radius: 10%;
+}
+.button:hover {
+  background-color:  hsl(190, 64%, 15%);
+}
+.button--flex {
+  display: flex;
+  align-items: center;
+  column-gap: .25rem;
+}
+.button--link {
+  background: none;
+  padding: 0;
+}
+.button--link:hover {
+  background: none;
+}
+.about__data {
+  text-align: center;
+}
+.about__container {
+  row-gap: 2.5rem;
+}
+.about__description {
+  margin-bottom: 2rem;
+}
+.about__img {
+  display: flex;
+  column-gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+.about__img-overlay {
+  overflow: hidden;
+  border-radius: 5%;
+}
+.about__img-one {
+  width: 130px;
+}
+.about__img-two {
+  width: 180px;
+}
+.about__img-one,.about__img-two {
+  transition: .3s;
+}
+.about__img-one:hover,.about__img-two:hover {
+  transform: scale(1.1);
+}
+.discover__card {
+  position: relative;
+  width: 200px;
+  overflow:hidden;
+  border-radius: 10%;
+}
+.discover__data {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1rem;
+}
+.discover__title {
+  color: #FFF;
+}
+.discover__title {
+  font-size: var(--h3-font-size);
+  margin-bottom: .25rem;
+}
+.discover__img {
+  transition: .3s;
+}
+.discover__img:hover {
+  transform: scale(1.1);
+}
+.swiper-container-3d .swiper-slide-shadow-left,
+.swiper-container-3d .swiper-slide-shadow-right {
+  background-image: none;
+}
+.experience__container {
+  row-gap: 2.5rem;
+  justify-content: center;
+  justify-items: center;
+}
+.experience__content {
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 1rem;
+  justify-items: center;
+  padding: 0 2rem;
+}
+.experience__number {
+  font-size: var(--h2-font-size);
+  font-weight: 600;
+  margin-bottom: .5rem;
+}
+.experience__description {
+  font-size: var(--small-font-size);
+}
+.experience__img {
+  position: relative;
+  padding-bottom: 2rem;
+}
+.experience__img-one,.experience__img-two {
+  transition: .3s;
+}
+.experience__img-one:hover,.experience__img-two:hover {
+  transform: scale(1.1);
+}
+.experience__overlay {
+  overflow: hidden;
+  border-radius: 5%;
+}
+.experience__overlay:nth-child(1) {
+  width: 263px;
+  margin-right: 2rem;
+}
+.experience__overlay:nth-child(2) {
+  width: 120px;
+  position: absolute;
+  top: 2rem;
+  right: 0;
+}
+.video__container {
+  padding-bottom: 1rem;
+}
+.video__description {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.video__content {
+  position: relative;
+}
+.video__button {
+  position: absolute;
+  right: 1rem;
+  bottom: -1rem;
+  border-radius: 10%;
+  padding: 1rem 1.5rem;
+}
+.video__button-icon {
+  font-size: 1.2rem;
+}
+.place__card, .place__img {
+  height: 230px;
+  border-radius: 5%;
+}
+.place__container {
+  grid-template-columns: repeat(2, max-content);
+  justify-content: center;
+}
+.place__card {
+  position: relative;
+  overflow: hidden;
+}
+.place__card:hover .place__img {
+  transform: scale(1.1);
+}
+.place__img {
+  transition: .3s;
+}
+.place__content, .place__title {
+  color: #FFF;
+}
+.place__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: .75rem .75rem 1rem;
+}
+.place__rating {
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+}
+.place__rating-icon {
+  font-size: .75rem;
+  margin-right: .25rem;
+}
+.place__rating-number {
+  font-size: var(--small-font-size);
+}
+.place__subtitle, .place__price {
+  display: block;
+}
+.place__title {
+  font-size: var(--h3-font-size);
+  margin-bottom: .25rem;
+}
+.place__subtitle {
+  font-size: var(--smaller-font-size);
+  margin-bottom:1.25rem;
+}
+.place__button {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: .75rem 1rem;
+}
+.subscribe__bg {
+  background-color: var(--first-color-second);
+  padding: 2.5rem 0;
+}
+.subscribe__title,.subscribe__description {
+  color: #FFF;
+}
+.subscribe__description {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.subscribe__form {
+  background-image:url(/assets/img/email.png);
+  padding: .5rem;
+  display: flex;
+  border-radius: 9%;
+  justify-content: space-between;
+}
+.subscribe__input {
+  width: 70%;
+  padding-right: .5rem;
+  border-radius: 10%;
+  background-color: var(--input-color);
+  color: var(--text-color);
+}
+.subscribe__input::placeholder {
+  color: var(--text-color);
+}
+.sponsor__container {
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  justify-items: center;
+  row-gap: 3.5rem;
+}
+.sponsor__content:hover .sponsor__img {
+  filter: invert(0.5);
+}
+.sponsor__img {
+  width: 90px;
+  filter: invert(0.7);
+  transition: .3s;
+}
+.footer__container {
+  row-gap: 10rem;
+}
+.footer__content {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  row-gap: 4rem;
+}
+.footer__title,.footer__subtitle {
+  font-size: var(--h3-font-size);
+}
+.footer__title {
+  margin-bottom: .5rem;
+}
+.footer__description {
+  margin-bottom: 2rem;
+}
+.footer__social {
+  font-size: 1.25rem;
+  color: var(--title-color);
+  margin-right: 1.25rem;
+}
+.footer__subtitle {
+  margin-bottom: 1rem;
+}
+.footer__item {
+  margin-bottom: .75rem;
+}
+.footer__link {
+  color: var(--text-color);
+}
+.footer__link:hover {
+  color: var(--title-color);
+}
+.footer__rights {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
+  text-align: center;
+}
+.footer__copy, .footer__terms-link {
+  font-size: var(--small-font-size);
+  color: hsl(190, 8%, 60%);
+}
+.footer__terms {
+  display: flex;
+  column-gap: 1.5rem;
+  justify-content: center;
+}
+.footer__terms-link:hover {
+  color: var(--text-color);
+}
+.scrollup {
+  position: fixed;
+  right: 1rem;
+  bottom: -20%;
+  background-color:hsl(190, 64%, 22%);
+  padding: .5rem;
+  display: flex;
+  opacity: .9;
+  border-radius: 60%;
+  z-index: 10;
+  transition: .4s;
+}
+.scrollup:hover {
+  background-color:hsl(190, 64%, 15%);
+  opacity: 1;
+}
+.scrollup__icon {
+  color: #FFF;
+  font-size: 1.2rem;
+}
+.show-scroll {
+  bottom: 5rem;
+}
+::-webkit-scrollbar {
+  width: .60rem;
+  background-color: var(--scroll-bar-color);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-thumb-color);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(190, 8%, 60%);
+}
+/* For small devices */
+@media screen and (max-width: 340px) {
+  .place__container {
+    grid-template-columns: max-content;
+    justify-content: center;
+  }
+  .experience__content {
+    padding: 0;
+  }
+  .experience__overlay:nth-child(1) {
+    width: 190px;
+  }
+  .experience__overlay:nth-child(2) {
+    width: 80px;
+  }
+  .home__info {
+    width: 190px;
+    padding: 1rem;
+  }
+  .experience__img,.video__container {
+    padding: 0;
+  }
+}
+/* For medium devices */
+@media screen and (min-width: 568px) {
+  .video__container {
+    display: grid;
+    grid-template-columns: .6fr;
+    justify-content: center;
+  }
+  .place__container {
+    grid-template-columns: repeat(3, max-content);
+  }
+  .subscribe__form {
+    width: 470px;
+    margin: 0 auto;
+  }
+}
+@media screen and (min-width: 768px) {
+  body {
+    margin: 0;
+  }
+  .nav {
+    height: calc(3rem + 1.5rem);
+  }
+  .nav__link {
+    color: #FFF;
+    text-transform: initial;
+  }
+  .nav__link:hover {
+    color: #FFF;
+  }
+  .nav__dark {
+    position: initial;
+  }
+  .nav__menu {
+    display: flex;
+    column-gap: 1rem;
+  }
+  .nav__list {
+    flex-direction: row;
+    column-gap: 4rem;
+  }
+  .nav__toggle, .nav__close {
+    display: none;
+  }
+  .change-theme-name {
+    display: none;
+  }
+  .change-theme {
+    color: #FFF;
+  }
+  .active-link::before {
+    background-color: #FFF;
+  }
+  .scroll-header .nav__link {
+    color: var(--text-color);
+  }
+  .scroll-header .active-link {
+    color: var(--title-color);
+  }
+  .scroll-header .active-link::before {
+    background-color: var(--title-color);
+  }
+  .scroll-header .change-theme {
+    color: var(--text-color);
+  }
+  .section {
+    padding: 7rem 0 2rem;
+  }
+  .home__container {
+    height: 100vh;
+    grid-template-rows: 1.8fr .5fr;
+  }
+  .home__data {
+    align-self: flex-end;
+  }
+  .home__social {
+    flex-direction: row;
+    align-self: flex-end;
+    margin-bottom: 3rem;
+    column-gap: 2.5rem;
+  }
+  .home__info {
+    bottom: 3rem;
+  }
+  .about__container {
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+  }
+  .about__data, .about__title {
+    text-align: initial;
+  }
+  .about__title {
+    margin-bottom: 1.5rem;
+  }
+  .about__description {
+    margin-bottom: 2rem;
+  }
+  .discover__container {
+    width: 610px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .discover__container,.place__container {
+    padding-top: 2rem;
+  }
+  .experience__overlay:nth-child(1) {
+    width: 363px;
+    margin-right: 4rem;
+  }
+  .experience__overlay:nth-child(2) {
+    width: 160px;
+  }
+  .subscribe__bg {
+    background: none;
+    padding: 0;
+  }
+  .subscribe__container {
+    background-color: var(--first-color-second);
+    padding: 3.5rem 0;
+  }
+  .subscribe__input {
+    padding: 0 .5rem;
+  }
+  .footer__rights {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+/* For large devices */
+@media screen and (min-width: 1024px) {
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .home__container {
+    grid-template-rows: 2fr .5fr;
+  }
+  .home__info {
+    width: 328px;
+    grid-template-columns: 1fr 2fr;
+    column-gap: 2rem;
+  }
+  .home__info-title {
+    font-size: var(--normal-font-size);
+  }
+  .home__info-img {
+    width: 240px;
+  }
+  .about__img-one {
+    width: 230px;
+  }
+  .about__img-two {
+    width: 290px;
+  }
+  .discover__card {
+    width: 237px;
+  }
+  .discover__container {
+    width: 700px;
+  }
+  .discover__data {
+    left: 1.5rem;
+    bottom: 2rem;
+  }
+  .discover__title {
+    font-size: var(--h2-font-size);
+  }
+  .experience__content {
+    margin: 1rem 0;
+    column-gap: 3.5rem;
+  }
+  .experience__overlay:nth-child(1) {
+    width: 463px;
+    margin-right: 7rem;
+  }
+  .experience__overlay:nth-child(2) {
+    width: 220px;
+    top: 3rem;
+  }
+  .video__container {
+    grid-template-columns: .7fr;
+  }
+  .video__description {
+    padding: 0 8rem;
+  }
+  .place__container {
+    gap: 3rem 2rem;
+  }
+  .place__card, .place__img {
+    height: 263px;
+  }
+  .footer__content {
+    justify-items: center;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+/* For mobiles & desktop*/
+@media screen and (min-height: 721px) {
+  body {
+    margin: 0;
+  }
+  .home__container, .home__img {
+    height: 640px;
+  }
+}
+    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <title> Website TravelGo. - ApnaCoderHub</title>
+</head>
+<body>
+<header class="header" id="header">
+<nav class="nav container">
+  <a href="#" class="nav__logo">TravelGo.</a>
+<div class="nav__menu" id="nav-menu">
+ <ul class="nav__list">
+   <li class="nav__item">
+       <a href="#home" class="nav__link active-link">Home</a>
+   </li>
+   <li class="nav__item">
+       <a href="#about" class="nav__link">About</a>
+   </li>
+   <li class="nav__item">
+       <a href="#discover" class="nav__link">Beaches</a>
+   </li>
+   <li class="nav__item">
+       <a href="#place" class="nav__link">Destination</a>
+   </li>
+ </ul>
+<div class="nav__dark">                    
+  <span class="change-theme-name">Dark mode</span>
+  <i class="ri-moon-line change-theme" id="theme-button"></i>
+</div>
+  <i class="ri-close-line nav__close" id="nav-close"></i>
+</div>
+<div class="nav__toggle" id="nav-toggle">
+  <i class="ri-function-line"></i>
+</div>
+</nav>
+</header>
+<main class="main">
+            <!--==================== HOME ====================-->
+<section class="home" id="home">
+  <img src="assets/img/home1.png" alt="" class="home__img">
+<div class="home__container container grid">
+<div class="home__data">
+  <span class="home__data-subtitle">Discover your destination</span>
+  <h1 class="home__data-title">Time To Explore <br> Best <b>Attractive <br> Beaches</b></h1>
+  <a href="#" class="button">Explore</a>
+</div>
+<div class="home__social">
+  <a href="https://www.facebook.com/" target="_blank" class="home__social-link">
+      <i class="ri-facebook-box-fill"></i>
+  </a>
+  <a href="https://www.instagram.com/" target="_blank" class="home__social-link">
+      <i class="ri-instagram-fill"></i>
+  </a>
+  <a href="https://twitter.com/" target="_blank" class="home__social-link">
+      <i class="ri-twitter-fill"></i>
+  </a>
+</div>
+<div class="home__info">
+<div>
+  <span class="home__info-title">Explore Vacation Time</span>
+  <a href="" class="button button--flex button--link home__info-button">
+   See<i class="ri-arrow-right-line"></i>
+  </a>
+</div>
+<div class="home__info-overlay">
+  <img src="assets/img/home2.png" alt="" class="home__info-img">
+</div>
+</div>
+</div>
+</section>
+            <!--==================== ABOUT ====================-->
+<section class="about section" id="about">
+<div class="about__container container grid">
+<div class="about__data">
+  <h2 class="section__title about__title">Lots of information <br> About the best beaches</h2>
+  <p class="about__description">You can locate the most stunning and first-rate places on the first-class 
+    charges with unique reductions, you choose the vicinity we are able to guide you all the way to attend, get your 
+    location now.</p>
+  <a href="#" class="button">Read More</a>
+</div>
+<div class="about__img">
+<div class="about__img-overlay">
+  <img src="assets/img/about1.jpg" alt="" class="about__img-one">
+</div>
+<div class="about__img-overlay">
+  <img src="assets/img/about2.jpg" alt="" class="about__img-two">
+</div>
+</div>
+</div>
+</section>
+                    <!--==================== DISCOVER ====================-->
+<section class="discover section" id="discover">
+  <h2 class="section__title">Discover the most <br> attractive beaches</h2>
+<div class="discover__container container swiper-container">
+<div class="swiper-wrapper">
+<div class="discover__card swiper-slide">
+  <img src="assets/img/discover1.jpg" alt="" class="discover__img">
+<div class="discover__data">
+  <h2 class="discover__title">Bali</h2>                         
+</div>
+</div>
+<div class="discover__card swiper-slide">
+  <img src="assets/img/discover2.jpg" alt="" class="discover__img">
+<div class="discover__data">
+  <h2 class="discover__title">Hawaii</h2>
+</div>
+</div>
+<div class="discover__card swiper-slide">
+  <img src="assets/img/discover3.jpg" alt="" class="discover__img">
+<div class="discover__data">
+  <h2 class="discover__title">Hvar</h2>
+</div>
+</div>
+<div class="discover__card swiper-slide">
+  <img src="assets/img/discover4.jpg" alt="" class="discover__img">
+<div class="discover__data">
+  <h2 class="discover__title">Whitehaven</h2>
+</div>
+</div>
+</div>
+</div>
+</section>
+            <!--==================== EXPERIENCE ====================-->
+<section class="experience section">
+  <h2 class="section__title">By Our Experience <br> We Will Serve You</h2>
+<div class="experience__container container grid">
+<div class="experience__content grid">
+<div class="experience__data">
+  <h2 class="experience__number">40+</h2>
+  <span class="experience__description">Year <br> Experience</span>
+</div>
+<div class="experience__data">
+  <h2 class="experience__number">150+</h2>
+  <span class="experience__description">Complete <br> tours</span>
+</div>
+<div class="experience__data">
+  <h2 class="experience__number">650+</h2>
+  <span class="experience__description">Tourist <br> Hotel</span>
+</div>
+</div>
+<div class="experience__img grid">
+<div class="experience__overlay">
+   <img src="assets/img/experience1.png" alt="" class="experience__img-one">
+</div>                    
+<div class="experience__overlay">
+  <img src="assets/img/experience2.jpg" alt="" class="experience__img-two">
+</div>
+</div>
+</div>
+</section>
+            <!--==================== VIDEO ====================-->
+<section class="video section">
+  <h2 class="section__title">Video Tour</h2>
+<div class="video__container container">
+  <p class="video__description">Learn more about the most beautiful and exciting 
+    places for you and your family with our video.</p>
+<div class="video__content">
+  <video id="video-file">
+   <source src="assets/video/beach.mp4" type="video/mp4">
+  </video>
+<button class="button button--flex video__button" id="video-button">
+  <i class="ri-play-line video__button-icon" id="video-icon"></i>
+</button>
+</div>
+</div>
+</section>
+            <!--==================== PLACES ====================-->
+<section class="place section" id="place">
+  <h2 class="section__title">Choose Your Destination</h2>
+  <div class="place__container container grid">
+<div class="place__card">
+  <img src="assets/img/place1.jpg" alt="" class="place__img">            
+<div class="place__content">
+  <span class="place__rating">
+   <i class="ri-star-line place__rating-icon"></i>
+   <span class="place__rating-number">3.8</span>
+  </span>
+<div class="place__data">
+  <h3 class="place__title">Bali</h3>
+  <span class="place__subtitle">Indonesia</span>
+  <span class="place__price">$2499</span>
+</div>
+</div>
+<button class="button button--flex place__button">
+  <i class="ri-arrow-right-line"></i>
+</button>
+</div>
+<div class="place__card">
+  <img src="assets/img/place2.jpg" alt="" class="place__img">         
+<div class="place__content">
+  <span class="place__rating">
+   <i class="ri-star-line place__rating-icon"></i>
+   <span class="place__rating-number">5.0</span>
+  </span>
+<div class="place__data">
+  <h3 class="place__title">Bora Bora</h3>
+  <span class="place__subtitle">Polinesia</span>
+  <span class="place__price">$1599</span>
+</div>
+</div>
+<button class="button button--flex place__button">
+  <i class="ri-arrow-right-line"></i>
+</button>
+</div>
+<div class="place__card">
+  <img src="assets/img/place3.jpg" alt="" class="place__img">         
+<div class="place__content">
+  <span class="place__rating">
+    <i class="ri-star-line place__rating-icon"></i>
+    <span class="place__rating-number">4.9</span>
+  </span>
+<div class="place__data">
+  <h3 class="place__title">Hawaii</h3>
+  <span class="place__subtitle">EE.UU</span>
+  <span class="place__price">$3499</span>
+</div>
+</div>
+<button class="button button--flex place__button">
+  <i class="ri-arrow-right-line"></i>
+</button>
+</div>
+<div class="place__card">
+  <img src="assets/img/place4.jpg" alt="" class="place__img">            
+<div class="place__content">
+  <span class="place__rating">
+   <i class="ri-star-line place__rating-icon"></i>
+   <span class="place__rating-number">4.5</span>
+  </span>
+<div class="place__data">
+  <h3 class="place__title">Whitehaven</h3>
+  <span class="place__subtitle">Australia</span>
+  <span class="place__price">$2499</span>
+</div>
+</div>
+<button class="button button--flex place__button">
+  <i class="ri-arrow-right-line"></i>
+</button>
+</div>
+<div class="place__card">
+  <img src="assets/img/place7.jpg" alt="" class="place__img">                          
+<div class="place__content">
+  <span class="place__rating">
+    <i class="ri-star-line place__rating-icon"></i>
+    <span class="place__rating-number">4.0</span>
+  </span>   
+<div class="place__data">
+  <h3 class="place__title">Lakshadweep</h3>
+  <span class="place__subtitle">India</span>
+  <span class="place__price">$4499</span>
+</div>
+</div>
+<button class="button button--flex place__button">
+  <i class="ri-arrow-right-line"></i>
+</button>
+</div>
+<div class="place__card">
+  <img src="assets/img/place5.jpg" alt="" class="place__img">                     
+<div class="place__content">
+  <span class="place__rating">
+   <i class="ri-star-line place__rating-icon"></i>
+   <span class="place__rating-number">4,8</span>
+  </span>
+<div class="place__data">
+  <h3 class="place__title">Hvar</h3>
+  <span class="place__subtitle">Croacia</span>
+  <span class="place__price">$1999</span>
+</div>
+</div>
+<button class="button button--flex place__button">
+  <i class="ri-arrow-right-line"></i>
+</button>
+</div>
+</div>
+</section>
+            <!--==================== SUBSCRIBE ====================-->
+<section class="subscribe section">
+<div class="subscribe__bg">
+<div class="subscribe__container container">
+  <h2 class="section__title subscribe__title">Following Our <br> Newsletter</h2>
+  <p class="subscribe__description">Follow to our newsletter and get a 
+      special 50% discount.</p>
+<form action="" class="subscribe__form">
+  <input type="text" placeholder="Enter your email..." class="subscribe__input">
+  <button class="button">Submit</button>
+</form>
+</div>
+</div>
+</section>          
+            <!--==================== SPONSORS ====================-->
+<section class="sponsor section">
+<div class="sponsor__container container grid">
+  <div class="sponsor__content">
+      <img src="assets/img/sponsors1.png" alt="" class="sponsor__img">
+  </div>
+  <div class="sponsor__content">
+      <img src="assets/img/sponsors2.png" alt="" class="sponsor__img">
+  </div>
+  <div class="sponsor__content">
+      <img src="assets/img/sponsors3.png" alt="" class="sponsor__img">
+  </div>
+  <div class="sponsor__content">
+      <img src="assets/img/sponsors4.png" alt="" class="sponsor__img">
+  </div>
+</div>
+</section>
+</main>
+        <!--==================== FOOTER ====================-->
+<footer class="footer section">
+<div class="footer__container container grid">
+<div class="footer__content grid">
+<div class="footer__data">
+  <h3 class="footer__title">TravelGo.</h3>
+  <p class="footer__description">Follow Us on</p>
+<div>
+  <a href="https://www.facebook.com/" target="_blank" class="footer__social">
+      <i class="ri-facebook-box-fill"></i>
+  </a>
+  <a href="https://twitter.com/" target="_blank" class="footer__social">
+      <i class="ri-twitter-fill"></i>
+  </a>
+  <a href="https://www.instagram.com/" target="_blank" class="footer__social">
+      <i class="ri-instagram-fill"></i>
+  </a>
+  <a href="https://www.youtube.com/" target="_blank" class="footer__social">
+      <i class="ri-youtube-fill"></i>
+  </a>
+</div>
+</div>
+<div class="footer__data">
+  <h3 class="footer__subtitle">Insurance</h3>
+<ul>
+  <li class="footer__item">
+      <a href="" class="footer__link">Travel Medical Insurance</a>
+  </li>
+  <li class="footer__item">
+      <a href="" class="footer__link">International Student Insurance</a>
+  </li>
+  <li class="footer__item">
+      <a href="" class="footer__link">Trip Insurance</a>
+  </li>
+</ul>
+</div>
+<div class="footer__data">
+  <h3 class="footer__subtitle">Company</h3>
+<ul>
+  <li class="footer__item">
+      <a href="" class="footer__link">About Trip</a>
+  </li>
+  <li class="footer__item">
+      <a href="" class="footer__link">Career</a>
+  </li>
+  <li class="footer__item">
+      <a href="" class="footer__link">Member Portal</a>
+  </li>
+</ul>
+</div>
+<div class="footer__data">
+  <h3 class="footer__subtitle">Help & Support</h3>
+<ul>
+  <li class="footer__item">
+      <a href="" class="footer__link">FAQs</a>
+  </li>
+  <li class="footer__item">
+      <a href="" class="footer__link">Support Center</a>
+  </li>
+  <li class="footer__item">
+      <a href="" class="footer__link">Contact Us</a>
+  </li>
+</ul>
+</div>
+</div>
+<div class="footer__rights">
+  <p class="footer__copy">&#169; TravelGo 2024. All right reserved.</p>
+<div class="footer__terms">
+  <a href="#" class="footer__terms-link">Terms & Conditions</a>
+  <a href="#" class="footer__terms-link">Privacy Policy</a>
+</div>
+</div>
+</div>
+</footer>
+         <!--========== SCROLL UP ==========-->
+<a href="#" class="scrollup" id="scroll-up">
+   <i class="ri-arrow-up-line scrollup__icon"></i>
+</a>
+        <!--=============== SCROLL REVEAL===============-->
+<script src="assets/js/scrollreveal.min.js"></script>
+        <!--=============== SWIPER JS ===============-->
+<script src="assets/js/swiper-bundle.min.js"></script>
+        <!--=============== JS ===============-->
+<script src="assets/js/main.js">
+    const navMenu = document.getElementById('nav-menu'),
+      navToggle = document.getElementById('nav-toggle'),
+      navClose = document.getElementById('nav-close')
+/*===== MENU SHOW =====*/
+if(navToggle){
+    navToggle.addEventListener('click', () =>{
+        navMenu.classList.add('show-menu')
+    })
+}
+/*===== MENU HIDDEN =====*/
+if(navClose){
+    navClose.addEventListener('click', () =>{
+        navMenu.classList.remove('show-menu')
+    })
+}
+/*==================== REMOVE MENU MOBILE ====================*/
+const navLink = document.querySelectorAll('.nav__link')
+function linkAction(){
+    const navMenu = document.getElementById('nav-menu')
+    navMenu.classList.remove('show-menu')
+}
+navLink.forEach(n => n.addEventListener('click', linkAction))
+/*==================== CHANGE BACKGROUND HEADER ====================*/
+function scrollHeader(){
+    const header = document.getElementById('header')
+    if(this.scrollY >= 100) header.classList.add('scroll-header'); else header.classList.remove('scroll-header')
+}
+window.addEventListener('scroll', scrollHeader)
+/*==================== SWIPER DISCOVER ====================*/
+let swiper = new Swiper(".discover__container", {
+    effect: "coverflow",
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: "auto",
+    loop: true,
+    spaceBetween: 32,
+    coverflowEffect: {
+        rotate: 0,
+    },
+})
+/*==================== VIDEO ====================*/
+const videoFile = document.getElementById('video-file'),
+      videoButton = document.getElementById('video-button'),
+      videoIcon = document.getElementById('video-icon')
+
+function playPause(){ 
+    if (videoFile.paused){
+        videoFile.play()
+        videoIcon.classList.add('ri-pause-line')
+        videoIcon.classList.remove('ri-play-line')
+    }
+    else {
+        videoFile.pause(); 
+        videoIcon.classList.remove('ri-pause-line')
+        videoIcon.classList.add('ri-play-line')
+    }
+}
+videoButton.addEventListener('click', playPause)
+function finalVideo(){
+    videoIcon.classList.remove('ri-pause-line')
+    videoIcon.classList.add('ri-play-line')
+}
+videoFile.addEventListener('ended', finalVideo)
+/*==================== SHOW SCROLL UP ====================*/ 
+function scrollUp(){
+    const scrollUp = document.getElementById('scroll-up');
+    if(this.scrollY >= 200) scrollUp.classList.add('show-scroll'); else scrollUp.classList.remove('show-scroll')
+}
+window.addEventListener('scroll', scrollUp)
+/*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
+const sections = document.querySelectorAll('section[id]')
+function scrollActive(){
+    const scrollY = window.pageYOffset
+    sections.forEach(current =>{
+        const sectionHeight = current.offsetHeight
+        const sectionTop = current.offsetTop - 50;
+        sectionId = current.getAttribute('id')
+        if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
+            document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.add('active-link')
+        }else{
+            document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.remove('active-link')
+        }
+    })
+}
+window.addEventListener('scroll', scrollActive)
+/*==================== SCROLL REVEAL ANIMATION ====================*/
+const sr = ScrollReveal({
+    distance: '60px',
+    duration: 2800,
+})
+sr.reveal(`.home__data, .home__social-link, .home__info,
+           .discover__container,
+           .experience__data, .experience__overlay,
+           .place__card,
+           .sponsor__content,
+           .footer__data, .footer__rights`,{
+    origin: 'top',
+    interval: 100,
+})
+sr.reveal(`.about__data, 
+           .video__description,
+           .subscribe__description`,{
+    origin: 'left',
+})
+sr.reveal(`.about__img-overlay, 
+           .video__content,
+           .subscribe__form`,{
+    origin: 'right',
+    interval: 100,
+})
+/*==================== DARK LIGHT THEME ====================*/ 
+const themeButton = document.getElementById('theme-button')
+const darkTheme = 'dark-theme'
+const iconTheme = 'ri-sun-line'
+
+const selectedTheme = localStorage.getItem('selected-theme')
+const selectedIcon = localStorage.getItem('selected-icon')
+
+const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
+const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'ri-moon-line' : 'ri-sun-line'
+
+if (selectedTheme) {
+  document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
+  themeButton.classList[selectedIcon === 'ri-moon-line' ? 'add' : 'remove'](iconTheme)
+}
+themeButton.addEventListener('click', () => {
+    document.body.classList.toggle(darkTheme)
+    themeButton.classList.toggle(iconTheme)
+    localStorage.setItem('selected-theme', getCurrentTheme())
+    localStorage.setItem('selected-icon', getCurrentIcon())
+})
+</script>
+</body>
+</html>
